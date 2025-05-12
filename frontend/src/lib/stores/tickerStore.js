@@ -1,5 +1,0 @@
-import { writable } from "svelte/store";
-const mockFilings = { AAPL: [ { id: "aapl-10k-2023", ticker: "AAPL", type: "10-K", date: "2023-10-27", title: "Annual Report", summary: "Apple reported a record annual revenue of $394.3 billion.", url: "#" } ] };
-const availableTickers = [ { symbol: "AAPL", name: "Apple Inc." }, { symbol: "MSFT", name: "Microsoft Corporation" }, { symbol: "GOOGL", name: "Alphabet Inc." } ];
-const initialState = { selectedTickers: [], availableTickers, filings: mockFilings, isLoading: false, error: null };
-const createTickerStore = () => { const { subscribe, set, update } = writable(initialState); return { subscribe, addTicker: (ticker) => { update(state => { if (state.selectedTickers.some(t => t.symbol === ticker.symbol)) { return state; } return { ...state, selectedTickers: [...state.selectedTickers, ticker] }; }); }, removeTicker: (symbol) => { update(state => ({ ...state, selectedTickers: state.selectedTickers.filter(t => t.symbol !== symbol) })); }, reset: () => set(initialState) }; }; export const tickerStore = createTickerStore();

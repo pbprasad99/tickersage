@@ -1,0 +1,91 @@
+{
+  "collections": [
+    {
+      "name": "tickers",
+      "type": "base",
+      "schema": [
+        {
+          "name": "symbol",
+          "type": "text",
+          "required": true,
+          "unique": true
+        },
+        {
+          "name": "name",
+          "type": "text",
+          "required": true
+        }
+      ]
+    },
+    {
+      "name": "filings",
+      "type": "base",
+      "schema": [
+        {
+          "name": "ticker",
+          "type": "relation",
+          "required": true,
+          "options": {
+            "collectionId": "tickers",
+            "cascadeDelete": false,
+            "minSelect": 1,
+            "maxSelect": 1
+          }
+        },
+        {
+          "name": "type",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "date",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "title",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "summary",
+          "type": "text",
+          "required": true
+        },
+        {
+          "name": "url",
+          "type": "url",
+          "required": false
+        }
+      ]
+    },
+    {
+      "name": "users_tickers",
+      "type": "base",
+      "schema": [
+        {
+          "name": "user",
+          "type": "relation",
+          "required": true,
+          "options": {
+            "collectionId": "users",
+            "cascadeDelete": true,
+            "minSelect": 1,
+            "maxSelect": 1
+          }
+        },
+        {
+          "name": "ticker",
+          "type": "relation",
+          "required": true,
+          "options": {
+            "collectionId": "tickers",
+            "cascadeDelete": false,
+            "minSelect": 1,
+            "maxSelect": 1
+          }
+        }
+      ]
+    }
+  ]
+} 

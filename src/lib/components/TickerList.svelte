@@ -1,8 +1,8 @@
 <script>
   import { tickerStore } from '$lib/stores/tickerStore';
   
-  function removeTicker(symbol) {
-    tickerStore.removeTicker(symbol);
+  function removeTicker(tickerId) {
+    tickerStore.removeTicker(tickerId);
   }
 </script>
 
@@ -10,28 +10,41 @@
   <h2 class="text-lg font-semibold mb-3">Your Watchlist</h2>
   
   {#if $tickerStore.selectedTickers.length === 0}
-    <div class="card bg-gray-50 border border-gray-200">
-      <p class="text-gray-500 text-center py-4">No tickers selected. Search for a company above to get started.</p>
+    <div class="card bg-base-200 border border-base-300">
+      <div class="card-body p-4 text-center">
+        <p class="text-gray-500">No tickers selected. Search for a company above to get started.</p>
+      </div>
     </div>
   {:else}
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-      {#each $tickerStore.selectedTickers as ticker}
-        <div class="card flex justify-between items-center border border-gray-200 hover:border-blue-300">
-          <div>
-            <div class="font-bold text-lg">{ticker.symbol}</div>
-            <div class="text-sm text-gray-600">{ticker.name}</div>
-          </div>
-          <button 
-            on:click={() => removeTicker(ticker.symbol)}
-            class="text-gray-400 hover:text-red-500"
-            aria-label="Remove {ticker.symbol}"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-              <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" />
-            </svg>
-          </button>
-        </div>
-      {/each}
+    <div class="overflow-x-auto">
+      <table class="table w-full table-zebra">
+        <thead>
+          <tr>
+            <th>Symbol</th>
+            <th>Company</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {#each $tickerStore.selectedTickers as ticker}
+            <tr>
+              <td class="font-bold">{ticker.symbol}</td>
+              <td>{ticker.name}</td>
+              <td>
+                <button 
+                  on:click={() => removeTicker(ticker.id)}
+                  class="btn btn-sm btn-error btn-ghost"
+                  title="Remove {ticker.symbol} from watchlist"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </td>
+            </tr>
+          {/each}
+        </tbody>
+      </table>
     </div>
   {/if}
 </div> 

@@ -58,16 +58,17 @@
         placeholder="Search for a ticker or company (e.g., AAPL, Apple)"
         bind:value={searchTerm}
         bind:this={inputElement}
-        class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+        class="input input-bordered w-full"
       />
       {#if isDropdownOpen && filteredTickers.length > 0}
-        <div class="absolute z-10 w-full mt-1 bg-white shadow-lg max-h-60 rounded-md overflow-auto">
+        <div class="absolute z-10 w-full mt-1 bg-base-100 shadow-lg max-h-60 rounded-md overflow-auto border border-base-300">
           <ul class="py-1" role="listbox">
             {#each filteredTickers as ticker}
               <li 
                 role="option"
+                aria-selected="false"
                 tabindex="0"
-                class="px-4 py-2 hover:bg-blue-100 cursor-pointer flex justify-between items-center"
+                class="px-4 py-2 hover:bg-base-200 cursor-pointer flex justify-between items-center"
                 on:click={() => addTicker(ticker)}
                 on:keydown={(e) => handleKeyPress(e, ticker)}
               >
@@ -75,7 +76,12 @@
                   <span class="font-medium">{ticker.symbol}</span>
                   <span class="text-gray-600 ml-2">{ticker.name}</span>
                 </div>
-                <button class="text-xs bg-blue-500 text-white py-1 px-2 rounded hover:bg-blue-600">
+                <button 
+                  class="btn btn-sm" 
+                  style="background-color: #4f46e5; color: white; border: none; box-shadow: none !important; min-width: 70px; padding: 0 0.75rem; transition: opacity 0.2s ease;"
+                  on:mouseover={(e) => e.currentTarget.style.opacity = '0.9'}
+                  on:mouseout={(e) => e.currentTarget.style.opacity = '1'}
+                >
                   Add
                 </button>
               </li>

@@ -12,6 +12,7 @@ export default {
     daisyui
   ],
   daisyui: {
-    themes: ["light"],
+    themes: ["light", "corporate", "business"],
+    darkTheme: "business",
   }
 }; 

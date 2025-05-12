@@ -1,6 +1,33 @@
 # TickerSage Changelog
 
-## Version 0.1.0 - Initial Release (Current)
+## Version 0.2.0 - Backend Integration (Current)
+
+### Features
+- Added PocketBase backend for data storage and API
+- Implemented user authentication (register, login, logout)
+- Added persistent storage for user watchlists
+- Created data models for tickers and SEC filings
+- Integrated frontend with PocketBase API
+- Updated UI with DaisyUI components
+- Added user profile dropdown in navigation
+
+### Technical Implementations
+- Set up PocketBase server for backend API and database
+- Created database schema for tickers, filings, and user relationships
+- Added PocketBase client integration in the frontend
+- Implemented API services for ticker and filing data
+- Created authentication components and routes
+- Added data seeding scripts for initial setup
+- Updated store implementation to use PocketBase API
+
+### UI/UX
+- Enhanced styling with DaisyUI component library
+- Added authentication forms for user login and registration
+- Improved overall UI consistency with theming
+- Added user profile indicator in the navigation bar
+- Implemented loading states for API interactions
+
+## Version 0.1.0 - Initial Release
 
 ### Features
 - Created SvelteKit project structure
